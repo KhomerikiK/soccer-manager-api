@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Events\UserRegistered;
 use App\Http\Controllers\Controller;
+use App\Models\Country;
 use App\Models\User;
-use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
@@ -31,8 +32,8 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
-
-        event(new Registered($user));
+        $country = Country::find($request->country_id)->first();
+        event(new UserRegistered($user, $country, $request->team_name));
 
         Auth::login($user);
 
