@@ -2,14 +2,12 @@
 
 namespace Database\Factories;
 
-use App\Models\Country;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Team>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Position>
  */
-class TeamFactory extends Factory
+class PositionFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -19,12 +17,11 @@ class TeamFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => User::factory(),
-            'country_id' => Country::first(),
             'name' => [
                 'en' => $this->faker->word,
                 'ka' => $this->faker->word,
             ],
+            'abbreviation' => $this->faker->unique()->word,
             'created_at' => $this->faker->dateTime(),
             'updated_at' => $this->faker->dateTime(),
         ];
