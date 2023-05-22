@@ -24,7 +24,6 @@ class BuyPlayerAction
     {
         $budget = $team->balance;
         $price = $playerListing->asking_price;
-        $transfer = null;
         if ($budget >= $playerListing->asking_price) {
             try {
                 DB::beginTransaction();

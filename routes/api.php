@@ -1,5 +1,13 @@
 <?php
 
+use App\Http\Controllers\Team\GetTeamController;
+use App\Http\Controllers\Team\GetTeamPlayerController;
+use App\Http\Controllers\Team\GetTeamPlayersController;
+use App\Http\Controllers\Team\ListTeamPlayerOnMarketController;
+use App\Http\Controllers\Team\UpdateTeamController;
+use App\Http\Controllers\Team\UpdateTeamPlayerController;
+use App\Http\Controllers\TransferMarket\BuyListedPlayerController;
+use App\Http\Controllers\TransferMarket\GetMarketDataController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -15,17 +23,30 @@ use Illuminate\Support\Facades\Route;
 */
 
 require __DIR__.'/auth.php';
-Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
-    return $request->user();
-});
 
-Route::middleware(['auth:sanctum'])->prefix('v1')->group(function () {
-    Route::get('team', \App\Http\Controllers\Team\GetTeamController::class);
-    Route::patch('team', \App\Http\Controllers\Team\UpdateTeamController::class);
-    Route::get('team/players', \App\Http\Controllers\Team\GetTeamPlayersController::class);
-    Route::get('team/players/{id}', \App\Http\Controllers\Team\GetTeamPlayerController::class);
-    Route::patch('team/players/{id}', \App\Http\Controllers\Team\UpdateTeamPlayerController::class);
-    Route::post('team/players/{id}/list', \App\Http\Controllers\Team\ListTeamPlayerOnMarketController::class);
-    Route::get('market-data', \App\Http\Controllers\TransferMarket\GetMarketDataController::class);
-    Route::post('market-data/{listingId}/buy', \App\Http\Controllers\TransferMarket\BuyListedPlayerController::class);
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::get('/user', function (Request $request) {
+        return $request->user();
+    })->name('user');
+
+    Route::prefix('v1')->group(function () {
+        Route::prefix('team')->group(function () {
+            Route::get('/', GetTeamController::class)->name('team.get');
+            Route::patch('/', UpdateTeamController::class)->name('team.update');
+            Route::prefix('/players')->group(function () {
+                Route::get('/', GetTeamPlayersController::class)->name('team.players.get');
+                Route::prefix('/{id}')->group(function () {
+                    Route::get('/', GetTeamPlayerController::class)->name('team.player.get');
+                    Route::patch('/', UpdateTeamPlayerController::class)->name('team.player.update');
+                    Route::post('/list', ListTeamPlayerOnMarketController::class)->name('team.player.list');
+                });
+            });
+
+        });
+
+        Route::prefix('market-data')->group(function () {
+            Route::get('/', GetMarketDataController::class)->name('market.get');
+            Route::post('/{listingId}/buy', BuyListedPlayerController::class)->name('market.buy');
+        });
+    });
 });
