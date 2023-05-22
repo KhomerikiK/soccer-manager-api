@@ -2,6 +2,7 @@
 
 namespace App\Events;
 
+use App\Models\Team;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Foundation\Events\Dispatchable;
@@ -14,7 +15,7 @@ class InitialTeamCreated
     /**
      * Create a new event instance.
      */
-    public function __construct()
+    public function __construct(public Team $team)
     {
         //
     }

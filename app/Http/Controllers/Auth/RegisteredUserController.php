@@ -24,6 +24,8 @@ class RegisteredUserController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
+            'team_name' => ['required', 'string', 'max:255'],
+            'country_code' => ['required', 'string', 'exists:countries,code'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
@@ -32,7 +34,7 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
-        $country = Country::find($request->country_id)->first();
+        $country = Country::where('code', $request->country_code)->first();
         event(new UserRegistered($user, $country, $request->team_name));
 
         Auth::login($user);

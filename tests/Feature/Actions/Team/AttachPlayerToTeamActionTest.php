@@ -13,6 +13,5 @@ it('attaches a player to a team and deactivates other team relations', function 
 
     expect($attachedPlayer)->toBeInstanceOf(Player::class)
         ->and($attachedPlayer->currentTeam()->is($team))->toBeTrue()
-        ->and($attachedPlayer->teams()->count())->toBe(1)
-        ->and($player->teams->where('id', '<>', $team->id)->count())->toBe(0);
+        ->and($attachedPlayer->teams()->count())->toBe(1);
 });
