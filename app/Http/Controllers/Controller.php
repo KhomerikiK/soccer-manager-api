@@ -14,9 +14,7 @@ class Controller extends BaseController
 
     protected function statusCode(int $code, $content = null): Response
     {
-        return response([
-            'message' => $content,
-        ], $code);
+        return response($content, $code);
     }
 
     protected function ok($content = null): Response

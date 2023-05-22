@@ -15,7 +15,8 @@ class BuyListedPlayerController extends Controller
         $user = auth()->user();
         /** @var Team $team */
         $team = $user->team;
-        $listing = PlayerListing::findOrFail($listingId);
+        $listing = PlayerListing::where('id', $listingId)->sharedLock()->lockForUpdate()->first();
+
         if (! $listing->is_open) {
             return $this->badRequest('The listing has been closed');
         }
