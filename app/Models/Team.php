@@ -48,4 +48,9 @@ class Team extends Model
     {
         return $this->hasMany(PlayerListing::class);
     }
+
+    public function checkBalance(int $amount): bool
+    {
+        return $this->balance >= $amount;
+    }
 }

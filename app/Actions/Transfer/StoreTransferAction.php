@@ -16,6 +16,7 @@ class StoreTransferAction
         $transfer->player()->associate($playerListing->player);
         $transfer->team()->associate($team);
         $transfer->transaction()->associate($transaction);
+        $transfer->save();
 
         return $transfer;
     }
