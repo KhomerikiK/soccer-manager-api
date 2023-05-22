@@ -19,6 +19,8 @@ class Player extends Model
         'last_name',
         'age',
         'market_price',
+        'position_id',
+        'country_id',
     ];
 
     protected $with = ['position', 'country'];
