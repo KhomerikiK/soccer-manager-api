@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Actions\Team;
+namespace App\Actions\Player;
 
 use App\Models\Country;
 use App\Models\Player;

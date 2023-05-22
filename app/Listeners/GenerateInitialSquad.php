@@ -2,8 +2,8 @@
 
 namespace App\Listeners;
 
+use App\Actions\Player\CreatePlayerAction;
 use App\Actions\Team\AttachPlayerToTeamAction;
-use App\Actions\Team\CreatePlayerAction;
 use App\Events\InitialTeamCreated;
 use App\Models\Country;
 use App\Models\Position;
