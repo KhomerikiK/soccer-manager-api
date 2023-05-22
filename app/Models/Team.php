@@ -53,4 +53,9 @@ class Team extends Model
     {
         return $this->balance >= $amount;
     }
+
+    public function transfers()
+    {
+        return $this->hasMany(Transfer::class);
+    }
 }
