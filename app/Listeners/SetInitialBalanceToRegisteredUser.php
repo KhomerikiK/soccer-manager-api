@@ -21,15 +21,15 @@ class SetInitialBalanceToRegisteredUser
      */
     public function handle(Registered $event): void
     {
-        DB::transaction(function () use ($event) {
-            $initialAmount = toBaseUnit(5000000);
-            $event->user->balance = $initialAmount;
-            $event->user->save();
-            $event->user->transactions()->create([
-                'type' => TransactionType::CREDIT,
-                'amount' => $initialAmount,
-                'description' => 'Initial balance',
-            ]);
-        });
+        //        DB::transaction(function () use ($event) {
+        //            $initialAmount = toBaseUnit(5000000);
+        //            $event->user->balance = $initialAmount;
+        //            $event->user->save();
+        //            $event->user->transactions()->create([
+        //                'type' => TransactionType::CREDIT,
+        //                'amount' => $initialAmount,
+        //                'description' => 'Initial balance',
+        //            ]);
+        //        });
     }
 }

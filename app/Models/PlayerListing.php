@@ -6,18 +6,18 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Transaction extends Model
+class PlayerListing extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'type',
-        'amount',
-        'description',
-    ];
+    public function player(): BelongsTo
+    {
+        return $this->belongsTo(Player::class);
+    }
 
     public function team(): BelongsTo
     {
         return $this->belongsTo(Team::class);
+
     }
 }
