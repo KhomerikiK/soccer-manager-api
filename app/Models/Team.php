@@ -16,7 +16,7 @@ class Team extends Model
 
     protected $fillable = [
         'name',
-        'country',
+        'country_id',
         'balance',
     ];
 

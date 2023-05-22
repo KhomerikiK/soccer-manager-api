@@ -3,6 +3,7 @@
 namespace App\Http;
 
 use App\Http\Middleware\AfterMiddleware;
+use App\Http\Middleware\SetLocale;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -44,6 +45,7 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\ThrottleRequests::class.':api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             AfterMiddleware::class,
+            SetLocale::class,
         ],
     ];
 
