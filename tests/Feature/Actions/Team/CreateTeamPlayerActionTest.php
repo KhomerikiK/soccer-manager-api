@@ -1,12 +1,10 @@
 <?php
 
-use App\Actions\Team\CreatePlayerAction;
+use App\Actions\Player\CreatePlayerAction;
 use App\Models\Player;
 use App\Models\Position;
-use App\Models\Team;
 
 it('creates a new player and associates them with position', function () {
-    $team = Team::factory()->create();
     $position = Position::factory()->create();
     $country = \App\Models\Country::first();
     $firstName = 'John';

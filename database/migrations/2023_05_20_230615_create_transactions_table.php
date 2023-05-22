@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\User;
+use App\Models\Team;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(User::class);
+            $table->foreignIdFor(Team::class);
             $table->string('type');
             $table->bigInteger('amount');
             $table->text('description')->nullable();

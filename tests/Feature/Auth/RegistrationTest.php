@@ -2,9 +2,6 @@
 
 namespace Tests\Feature\Auth;
 
-
-use App\Models\User;
-
 test('new user can register', function () {
     $response = $this->post('/api/register', [
         'name' => 'Test User',

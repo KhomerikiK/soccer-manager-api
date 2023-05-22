@@ -25,6 +25,7 @@ class TeamFactory extends Factory
                 'en' => $this->faker->word,
                 'ka' => $this->faker->word,
             ],
+            'balance' => 500000000,
             'created_at' => $this->faker->dateTime(),
             'updated_at' => $this->faker->dateTime(),
         ];
