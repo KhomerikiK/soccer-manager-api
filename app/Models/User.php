@@ -59,4 +59,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(Team::class);
     }
+
+    public function getTeamPlayer(int $id): Player
+    {
+        return $this->team->players()->where('players.id', $id)->firstOrFail();
+    }
 }
