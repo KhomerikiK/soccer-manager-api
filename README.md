@@ -20,63 +20,63 @@ For administrative purposes, this API also includes Laravel Nova integration. La
     - Controller: `RegisteredUserController@store`
     - Accessibility: Guest users
 
-- **Login (`POST /login`)**
+- **Login (`POST api/v1/login`)**
     - Controller: `AuthenticatedSessionController@store`
     - Accessibility: Guest users
 
-- **Forgot Password (`POST /forgot-password`)**
+- **Forgot Password (`POST api/v1/forgot-password`)**
     - Controller: `PasswordResetLinkController@store`
     - Accessibility: Guest users
 
-- **Reset Password (`POST /reset-password`)**
+- **Reset Password (`POST api/v1/reset-password`)**
     - Controller: `NewPasswordController@store`
     - Accessibility: Guest users
 
-- **Verify Email (`GET /verify-email/{id}/{hash}`)**
+- **Verify Email (`GET api/v1/verify-email/{id}/{hash}`)**
     - Controller: `VerifyEmailController`
     - Accessibility: Authenticated users
 
-- **Resend Verification Email (`POST /email/verification-notification`)**
+- **Resend Verification Email (`POST api/v1/email/verification-notification`)**
     - Controller: `EmailVerificationNotificationController@store`
     - Accessibility: Authenticated users
 
-- **Logout (`POST /logout`)**
+- **Logout (`POST api/v1/logout`)**
     - Controller: `AuthenticatedSessionController@destroy`
     - Accessibility: Authenticated users
 
 ### Football manager endpoints
 
-- **Get User (`GET /user`)**
+- **Get User (`GET api/v1/user`)**
     - Description: Fetches the details of the currently authenticated user.
 
-- **Get Team (`GET /v1/team`)**
+- **Get Team (`GET api/v1/team`)**
     - Controller: `GetTeamController`
     - Description: Fetches the details of the authenticated user's team.
 
-- **Update Team (`PATCH /v1/team`)**
+- **Update Team (`PATCH api/v1/team`)**
     - Controller: `UpdateTeamController`
     - Description: Updates the details of the authenticated user's team.
 
-- **Get Team Players (`GET /v1/team/players`)**
+- **Get Team Players (`GET api/v1/team/players`)**
     - Controller: `GetTeamPlayersController`
     - Description: Fetches all the players of the authenticated user's team.
 
-- **Get Team Player (`GET /v1/team/players/{id}`)**
+- **Get Team Player (`GET api/v1/team/players/{id}`)**
     - Controller: `GetTeamPlayerController`
     - Description: Fetches the details of a specific player (identified by `{id}`) of the authenticated user's team.
 
-- **Update Team Player (`PATCH /v1/team/players/{id}`)**
+- **Update Team Player (`PATCH api/v1/team/players/{id}`)**
     - Controller: `UpdateTeamPlayerController`
     - Description: Updates the details of a specific player (identified by `{id}`) of the authenticated user's team.
 
-- **List Team Player (`POST /v1/team/players/{id}/list`)**
+- **List Team Player (`POST api/v1/team/players/{id}/list`)**
     - Controller: `ListTeamPlayerOnMarketController`
     - Description: Lists a specific player (identified by `{id}`) of the authenticated user's team on the market.
 
-- **Get Market Data (`GET /v1/market-data`)**
+- **Get Market Data (`GET api/v1/market-data`)**
     - Controller: `GetMarketDataController`
     - Description: Fetches all the players currently listed on the market.
 
-- **Buy Listed Player (`POST /v1/market-data/{listingId}/buy`)**
+- **Buy Listed Player (`POST api/v1/market-data/{listingId}/buy`)**
     - Controller: `BuyListedPlayerController`
     - Description: Purchases a specific player (identified by `{listingId}`) from the market.
