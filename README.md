@@ -1,66 +1,82 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Fantasy Football API
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+This API provides endpoints for both user authentication and fantasy football management.
 
-## About Laravel
+# API Features
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Localization
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+The API supports multiple languages and is built with localization in mind. In order to request resources in a particular language, include the `X-App-Locale` header in your request with the desired language code (e.g., 'en' for English, 'ka' for Georgian).
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Laravel Nova for Admin Functionalities
 
-## Learning Laravel
+For administrative purposes, this API also includes Laravel Nova integration. Laravel Nova is a beautiful administration panel for Laravel that provides a robust set of tools for managing the application's resources.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## API Endpoints
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### Authentication Endpoints
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- **Registration (`POST /register`)**
+    - Controller: `RegisteredUserController@store`
+    - Accessibility: Guest users
 
-## Laravel Sponsors
+- **Login (`POST /login`)**
+    - Controller: `AuthenticatedSessionController@store`
+    - Accessibility: Guest users
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+- **Forgot Password (`POST /forgot-password`)**
+    - Controller: `PasswordResetLinkController@store`
+    - Accessibility: Guest users
 
-### Premium Partners
+- **Reset Password (`POST /reset-password`)**
+    - Controller: `NewPasswordController@store`
+    - Accessibility: Guest users
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+- **Verify Email (`GET /verify-email/{id}/{hash}`)**
+    - Controller: `VerifyEmailController`
+    - Accessibility: Authenticated users
 
-## Contributing
+- **Resend Verification Email (`POST /email/verification-notification`)**
+    - Controller: `EmailVerificationNotificationController@store`
+    - Accessibility: Authenticated users
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+- **Logout (`POST /logout`)**
+    - Controller: `AuthenticatedSessionController@destroy`
+    - Accessibility: Authenticated users
 
-## Code of Conduct
+### Football manager endpoints
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+- **Get User (`GET /user`)**
+    - Description: Fetches the details of the currently authenticated user.
 
-## Security Vulnerabilities
+- **Get Team (`GET /v1/team`)**
+    - Controller: `GetTeamController`
+    - Description: Fetches the details of the authenticated user's team.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+- **Update Team (`PATCH /v1/team`)**
+    - Controller: `UpdateTeamController`
+    - Description: Updates the details of the authenticated user's team.
 
-## License
+- **Get Team Players (`GET /v1/team/players`)**
+    - Controller: `GetTeamPlayersController`
+    - Description: Fetches all the players of the authenticated user's team.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- **Get Team Player (`GET /v1/team/players/{id}`)**
+    - Controller: `GetTeamPlayerController`
+    - Description: Fetches the details of a specific player (identified by `{id}`) of the authenticated user's team.
+
+- **Update Team Player (`PATCH /v1/team/players/{id}`)**
+    - Controller: `UpdateTeamPlayerController`
+    - Description: Updates the details of a specific player (identified by `{id}`) of the authenticated user's team.
+
+- **List Team Player (`POST /v1/team/players/{id}/list`)**
+    - Controller: `ListTeamPlayerOnMarketController`
+    - Description: Lists a specific player (identified by `{id}`) of the authenticated user's team on the market.
+
+- **Get Market Data (`GET /v1/market-data`)**
+    - Controller: `GetMarketDataController`
+    - Description: Fetches all the players currently listed on the market.
+
+- **Buy Listed Player (`POST /v1/market-data/{listingId}/buy`)**
+    - Controller: `BuyListedPlayerController`
+    - Description: Purchases a specific player (identified by `{listingId}`) from the market.

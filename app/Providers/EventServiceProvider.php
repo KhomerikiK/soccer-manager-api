@@ -5,10 +5,10 @@ namespace App\Providers;
 use App\Events\InitialTeamCreated;
 use App\Events\TransferCompleted;
 use App\Events\UserRegistered;
+use App\Listeners\ClosePlayerListing;
 use App\Listeners\CreateInitialTeamForRegisteredUser;
 use App\Listeners\GenerateInitialSquad;
 use App\Listeners\IncreazePlayerMarketValue;
-use App\Listeners\SetInitialBalanceToRegisteredUser;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Event;
@@ -23,7 +23,6 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         UserRegistered::class => [
             SendEmailVerificationNotification::class,
-            SetInitialBalanceToRegisteredUser::class,
             CreateInitialTeamForRegisteredUser::class,
         ],
         InitialTeamCreated::class => [
@@ -32,6 +31,7 @@ class EventServiceProvider extends ServiceProvider
 
         TransferCompleted::class => [
             IncreazePlayerMarketValue::class,
+            ClosePlayerListing::class,
         ],
     ];
 
