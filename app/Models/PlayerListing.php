@@ -40,4 +40,9 @@ class PlayerListing extends Model
         return $this->belongsTo(Team::class);
 
     }
+
+    public function transfer()
+    {
+        return $this->hasOne(Transfer::class);
+    }
 }

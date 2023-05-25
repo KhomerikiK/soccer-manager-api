@@ -4,6 +4,7 @@ namespace App\Actions\Team;
 
 use App\Actions\Transfer\StoreTransferAction;
 use App\Enums\TransactionType;
+use App\Models\Player;
 use App\Models\PlayerListing;
 use App\Models\Team;
 use Illuminate\Support\Facades\DB;
@@ -37,6 +38,8 @@ class BuyPlayerAction
                 $playerListing->is_open = false;
                 $playerListing->save();
 
+                $this->increasePlayerValue($playerListing->player);
+
                 DB::commit();
             } catch (\Exception $e) {
                 DB::rollBack();
@@ -47,5 +50,14 @@ class BuyPlayerAction
         }
 
         return $transfer;
+    }
+
+    private function increasePlayerValue(Player $player): void
+    {
+        $increasePercent = rand(10, 100);
+        $newValue = $player->market_price * (1 + $increasePercent / 100);
+        $player->market_price = $newValue;
+        $player->save();
+
     }
 }

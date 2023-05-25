@@ -4,7 +4,6 @@ namespace App\Nova;
 
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
-use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
@@ -46,8 +45,6 @@ class Transfer extends Resource
             BelongsTo::make('Player'),
             BelongsTo::make('Team'),
             BelongsTo::make('Transaction'),
-            HasMany::make('Transactions'),
-            HasMany::make('transfers'),
 
         ];
     }

@@ -25,7 +25,17 @@ class Player extends Model
 
     protected $with = ['position', 'country'];
 
+    protected $appends = ['name'];
+
     public array $translatable = ['first_name', 'last_name'];
+
+    /**
+     * Interact with the user's first name.
+     */
+    public function getNameAttribute(): string
+    {
+        return "{$this->first_name} {$this->last_name}";
+    }
 
     public function position(): BelongsTo
     {

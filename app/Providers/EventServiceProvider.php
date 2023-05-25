@@ -3,9 +3,11 @@
 namespace App\Providers;
 
 use App\Events\InitialTeamCreated;
+use App\Events\TransferCompleted;
 use App\Events\UserRegistered;
 use App\Listeners\CreateInitialTeamForRegisteredUser;
 use App\Listeners\GenerateInitialSquad;
+use App\Listeners\IncreazePlayerMarketValue;
 use App\Listeners\SetInitialBalanceToRegisteredUser;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -26,6 +28,10 @@ class EventServiceProvider extends ServiceProvider
         ],
         InitialTeamCreated::class => [
             GenerateInitialSquad::class,
+        ],
+
+        TransferCompleted::class => [
+            IncreazePlayerMarketValue::class,
         ],
     ];
 
