@@ -2,12 +2,8 @@
 
 namespace App\Listeners;
 
-use App\Actions\Team\AdjustTeamBalanceAction;
-use App\Actions\Team\CreateTeamAction;
-use App\Enums\TransactionType;
-use App\Events\InitialTeamCreated;
-use App\Models\Country;
-use Illuminate\Auth\Events\Registered;
+use App\Actions\Team\CreateInitialTeamAction;
+use App\Events\UserRegistered;
 
 class CreateInitialTeamForRegisteredUser
 {
@@ -15,21 +11,18 @@ class CreateInitialTeamForRegisteredUser
      * Create the event listener.
      */
     public function __construct(
-        protected readonly CreateTeamAction $createTeamAction,
-        protected readonly AdjustTeamBalanceAction $adjustTeamBalanceAction)
-    {
+        protected readonly CreateInitialTeamAction $createInitialTeamAction,
+    ) {
         //
     }
 
     /**
      * Handle the event.
+     *
+     * @throws \Exception
      */
-    public function handle(Registered $event): void
+    public function handle(UserRegistered $event): void
     {
-        $initialBalance = toBaseUnit(5000000);
-        $country = Country::find(1)->first();
-        $team = $this->createTeamAction->execute($event->user, $country, 'bane');
-        $this->adjustTeamBalanceAction->execute($team, $initialBalance, TransactionType::CREDIT);
-        event(new InitialTeamCreated($team));
+        $this->createInitialTeamAction->execute($event->user, $event->country, $event->teamName);
     }
 }

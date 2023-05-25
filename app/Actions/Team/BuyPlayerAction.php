@@ -4,6 +4,7 @@ namespace App\Actions\Team;
 
 use App\Actions\Transfer\StoreTransferAction;
 use App\Enums\TransactionType;
+use App\Events\TransferCompleted;
 use App\Models\PlayerListing;
 use App\Models\Team;
 use Illuminate\Support\Facades\DB;
@@ -34,8 +35,7 @@ class BuyPlayerAction
                 $this->attachPlayerToTeamAction->execute($playerListing->player, $team);
                 $transfer = $this->storeTransferAction->execute($playerListing, $team, $transferTransaction);
 
-                $playerListing->is_open = false;
-                $playerListing->save();
+                event(new TransferCompleted($playerListing));
 
                 DB::commit();
             } catch (\Exception $e) {

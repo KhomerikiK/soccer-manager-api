@@ -5,7 +5,7 @@ namespace App\Nova;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
-use Laravel\Nova\Fields\HasMany;
+use Laravel\Nova\Fields\HasOne;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Http\Requests\NovaRequest;
@@ -47,9 +47,8 @@ class PlayerListing extends Resource
             BelongsTo::make('Team'),
             BelongsTo::make('Player'),
             Number::make('Asking Price'),
-            Boolean::make('Is Ipen'),
-            HasMany::make('Transactions'),
-            HasMany::make('Transfers'),
+            Boolean::make('Is Open'),
+            HasOne::make('transfer'),
         ];
     }
 

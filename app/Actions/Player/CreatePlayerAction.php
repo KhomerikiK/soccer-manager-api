@@ -8,7 +8,7 @@ use App\Models\Position;
 
 class CreatePlayerAction
 {
-    public function execute(string $firstName, string $lastName, int $age, int $price, Position $position, Country $country): Player
+    public function execute(string|array $firstName, string|array $lastName, int $age, int $price, Position $position, Country $country): Player
     {
         $player = new Player;
         $player->first_name = $firstName;

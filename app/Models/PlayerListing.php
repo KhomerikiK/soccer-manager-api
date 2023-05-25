@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class PlayerListing extends Model
 {
@@ -39,5 +40,10 @@ class PlayerListing extends Model
     {
         return $this->belongsTo(Team::class);
 
+    }
+
+    public function transfer(): HasOne
+    {
+        return $this->hasOne(Transfer::class);
     }
 }
