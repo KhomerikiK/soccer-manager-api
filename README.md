@@ -12,6 +12,27 @@ The API supports multiple languages and is built with localization in mind. In o
 
 For administrative purposes, this API also includes Laravel Nova integration. Laravel Nova is a beautiful administration panel for Laravel that provides a robust set of tools for managing the application's resources.
 
+## Requirements
+
+- PHP
+- Composer
+- Laravel CLI
+
+## Installation & Setup
+
+```bash
+git clone git@github.com:KhomerikiK/soccer-manager-api.git
+cd soccer-manager-api
+
+composer install
+
+php artisan test
+
+php artisan migrate
+
+php artisan db:seed
+
+```
 ## API Endpoints
 
 ### Authentication Endpoints
