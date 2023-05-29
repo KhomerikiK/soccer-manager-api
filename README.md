@@ -33,6 +33,13 @@ php artisan migrate
 php artisan db:seed
 
 ```
+
+## Nova admin user
+```bash
+email: admin@nova.com
+password: password
+```
+
 ## API Endpoints
 
 ### Authentication Endpoints
