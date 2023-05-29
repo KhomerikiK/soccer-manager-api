@@ -23,7 +23,7 @@ class UpdateTeamRequest extends FormRequest
     {
         return [
             'name' => ['string'],
-            'country_id' => 'exists:countries,id',
+            'country_code' => ['required', 'string', 'exists:countries,code'],
         ];
     }
 }
